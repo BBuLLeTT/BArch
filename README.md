@@ -1,2 +1,2 @@
 # Arch installation
-Intallation: bash <(curl -s https://github.com/BBuLLeTT/BArch/blob/master/base.sh)
+Intallation: bash <(curl -s https://raw.githubusercontent.com/BBuLLeTT/BArch/master/base.sh)
