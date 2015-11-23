@@ -224,7 +224,7 @@ root ALL=(ALL) ALL
 
 ## Same thing without a password
 #%wheel ALL=(ALL) NOPASSWD: ALL
-%wheel ALL=(ALL) NOPASSWD: /usr/bin/pacman
+%wheel ALL=(ALL) NOPASSWD: /usr/bin/pacman, /usr/bin/makepkg
 ## Uncomment to allow members of group sudo to execute any command
 # %sudo	ALL=(ALL) ALL
 
