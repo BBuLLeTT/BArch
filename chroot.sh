@@ -163,7 +163,7 @@ fi
 passwd $user
 $gpu;
 echo 'pacman -S ntfs-3g os-prober grub gnome gdm gnome-extra yaourt sudo bash-completion --noconfirm --needed'
-pacman -S ntfs-3g os-prober grub gnome gdm gnome-extra yaourt sudo bash-completion --noconfirm --needed
+pacman -S ntfs-3g os-prober grub gnome gdm gnome-extra yaourt sudo bash-completion linux-headers --noconfirm --needed
 echo '
 ## sudoers file.
 ##
