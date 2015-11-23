@@ -244,9 +244,9 @@ Description=BArch installation
 
 [Service]
 User=root
-ExecStart=/etc/profile.d/barch.sh
+ExecStart=/barch.sh' $user '
 
 [Install]
 WantedBy=multi-user.target
 ' > /etc/systemd/system/barch.service
-systemctl enable barch gdm NetworkManager
+systemctl enable gdm NetworkManager
