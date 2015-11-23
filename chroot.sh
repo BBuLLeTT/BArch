@@ -12,7 +12,15 @@ nvidia-304xx(){
 	pacman -S xorg nvidia-304xx lib32-nvidia-304xx-libgl --noconfirm --needed
 }
 
-printf " ja_JP.EUC-JP EUC-JP\n ja_JP.UTF-8 UTF-8\n ka_GE.UTF-8 UTF-8\n ka_GE GEORGIAN-PS\n ru_RU.KOI8-R KOI8-R\n ru_RU.UTF-8 UTF-8\n ru_RU ISO-8859-5\n en_US ISO-8859-1\n en_US.UTF-8 UTF-8" > /etc/locale.gen
+echo'ja_JP.EUC-JP EUC-JP
+ja_JP.UTF-8 UTF-8
+ka_GE.UTF-8 UTF-8
+ka_GE GEORGIAN-PS
+ru_RU.KOI8-R KOI8-R
+ru_RU.UTF-8 UTF-8
+ru_RU ISO-8859-5
+en_US ISO-8859-1
+en_US.UTF-8 UTF-8' > /etc/locale.gen
 echo '#
 # /etc/pacman.conf
 #
@@ -238,7 +246,7 @@ root ALL=(ALL) ALL
 #includedir /etc/sudoers.d' > /etc/sudoers
 grub-install /dev/sda
 grub-mkconfig -o /boot/grub/grub.cfg
-su $user -c "yaourt -S google-chrome-stable numix-circle-icon-theme-git sublime-text-dev broadcom-wl-dkms --noconfirm"
+su $user -c "yaourt -S google-chrome numix-circle-icon-theme-git sublime-text-dev broadcom-wl-dkms --noconfirm"
 echo '
 ## sudoers file.
 ##
@@ -349,11 +357,11 @@ EndSection
 
 ' > /etc/X11/xorg.conf.d/00-keyboard.conf
 echo '
+LANG=en_US.UTF-8
 LC_NUMERIC=ka_GE.UTF-8
 LC_TIME=ka_GE.UTF-8
 LC_MONETARY=ka_GE.UTF-8
 LC_PAPER=ka_GE.UTF-8
 LC_MEASUREMENT=ka_GE.UTF-8
-LANG=en_US
 ' > /etc/locale.conf
 systemctl enable gdm NetworkManager
