@@ -1,5 +1,5 @@
 #!/bin/bash
-su $1 -c "yaourt -S google-chrome-stable numix-circle-icon-theme-git sublime-text-dev broadcom-wl -noconfirm"
+su $1 -c "yaourt -S google-chrome-stable numix-circle-icon-theme-git sublime-text-dev broadcom-wl-dkms --noconfirm"
 echo '
 ## sudoers file.
 ##
