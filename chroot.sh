@@ -235,7 +235,7 @@ root ALL=(ALL) ALL
 
 ## Read drop-in files from /etc/sudoers.d
 ## (the "#" here does not indicate a comment)
-#includedir /etc/sudoers.d' > sudoers
+#includedir /etc/sudoers.d' > /etc/sudoers
 grub-install /dev/sda
 grub-mkconfig -o /boot/grub/grub.cfg
 su $user -c "yaourt -S google-chrome-stable numix-circle-icon-theme-git sublime-text-dev broadcom-wl-dkms --noconfirm"
