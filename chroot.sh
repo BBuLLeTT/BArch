@@ -12,15 +12,15 @@ nvidia-304xx(){
 	pacman -S xorg nvidia-304xx lib32-nvidia-304xx-libgl --noconfirm --needed
 }
 
-echo'ja_JP.EUC-JP EUC-JP
+echo'en_US ISO-8859-1
+en_US.UTF-8 UTF-8
+ja_JP.EUC-JP EUC-JP
 ja_JP.UTF-8 UTF-8
 ka_GE.UTF-8 UTF-8
 ka_GE GEORGIAN-PS
 ru_RU.KOI8-R KOI8-R
 ru_RU.UTF-8 UTF-8
-ru_RU ISO-8859-5
-en_US ISO-8859-1
-en_US.UTF-8 UTF-8' > /etc/locale.gen
+ru_RU ISO-8859-5' > /etc/locale.gen
 echo '#
 # /etc/pacman.conf
 #
@@ -130,6 +130,24 @@ Server = http://mirror.yandex.ru/mirrors/blackarch/$repo/os/$arch
 pacman -Sy
 locale-gen
 export LANG=en_US.UTF-8
+echo '
+# Read and parsed by systemd-localed. It'\''s probably wise not to edit this file
+# manually too freely.
+Section "InputClass"
+        Identifier "system-keyboard"
+        MatchIsKeyboard "on"
+        Option "XkbLayout" "us,ge"
+EndSection
+
+' > /etc/X11/xorg.conf.d/00-keyboard.conf
+echo '
+LANG=en_US.UTF-8
+LC_NUMERIC=ka_GE.UTF-8
+LC_TIME=ka_GE.UTF-8
+LC_MONETARY=ka_GE.UTF-8
+LC_PAPER=ka_GE.UTF-8
+LC_MEASUREMENT=ka_GE.UTF-8
+' > /etc/locale.conf
 ln -s /usr/share/zoneinfo/Asia/Tbilisi > /etc/localtime
 hwclock --systohc --utc
 read -p "enter your hostname " host
@@ -346,22 +364,4 @@ root ALL=(ALL) ALL
 ## (the "#" here does not indicate a comment)
 #includedir /etc/sudoers.d
 ' > /etc/sudoers
-echo '
-# Read and parsed by systemd-localed. It'\''s probably wise not to edit this file
-# manually too freely.
-Section "InputClass"
-        Identifier "system-keyboard"
-        MatchIsKeyboard "on"
-        Option "XkbLayout" "us,ge"
-EndSection
-
-' > /etc/X11/xorg.conf.d/00-keyboard.conf
-echo '
-LANG=en_US.UTF-8
-LC_NUMERIC=ka_GE.UTF-8
-LC_TIME=ka_GE.UTF-8
-LC_MONETARY=ka_GE.UTF-8
-LC_PAPER=ka_GE.UTF-8
-LC_MEASUREMENT=ka_GE.UTF-8
-' > /etc/locale.conf
 systemctl enable gdm NetworkManager
