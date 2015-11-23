@@ -12,7 +12,7 @@ nvidia-304xx(){
 	pacman -S xorg nvidia-304xx lib32-nvidia-304xx-libgl --noconfirm --needed
 }
 
-echo'en_US ISO-8859-1
+echo 'en_US ISO-8859-1
 en_US.UTF-8 UTF-8
 ja_JP.EUC-JP EUC-JP
 ja_JP.UTF-8 UTF-8
