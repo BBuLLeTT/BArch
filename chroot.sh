@@ -238,14 +238,122 @@ root ALL=(ALL) ALL
 #includedir /etc/sudoers.d' > sudoers
 grub-install /dev/sda
 grub-mkconfig -o /boot/grub/grub.cfg
-echo '[Unit]
-Description=BArch installation
+su $user -c "yaourt -S google-chrome-stable numix-circle-icon-theme-git sublime-text-dev broadcom-wl-dkms --noconfirm"
+echo '
+## sudoers file.
+##
+## This file MUST be edited with the "visudo" command as root.
+## Failure to use "visudo" may result in syntax or file permission errors
+## that prevent sudo from running.
+##
+## See the sudoers man page for the details on how to write a sudoers file.
+##
 
-[Service]
-User=root
-ExecStart=/barch.sh' $user '
+##
+## Host alias specification
+##
+## Groups of machines. These may include host names (optionally with wildcards),
+## IP addresses, network numbers or netgroups.
+# Host_Alias	WEBSERVERS = www1, www2, www3
 
-[Install]
-WantedBy=multi-user.target
-' > /etc/systemd/system/barch.service
-systemctl enable barch gdm NetworkManager
+##
+## User alias specification
+##
+## Groups of users.  These may consist of user names, uids, Unix groups,
+## or netgroups.
+# User_Alias	ADMINS = millert, dowdy, mikef
+
+##
+## Cmnd alias specification
+##
+## Groups of commands.  Often used to group related commands together.
+# Cmnd_Alias	PROCESSES = /usr/bin/nice, /bin/kill, /usr/bin/renice, \
+# 			    /usr/bin/pkill, /usr/bin/top
+# Cmnd_Alias	REBOOT = /sbin/halt, /sbin/reboot, /sbin/poweroff
+
+##
+## Defaults specification
+##
+## You may wish to keep some of the following environment variables
+## when running commands via sudo.
+##
+## Locale settings
+# Defaults env_keep += "LANG LANGUAGE LINGUAS LC_* _XKB_CHARSET"
+##
+## Run X applications through sudo; HOME is used to find the
+## .Xauthority file.  Note that other programs use HOME to find   
+## configuration files and this may lead to privilege escalation!
+# Defaults env_keep += "HOME"
+##
+## X11 resource path settings
+# Defaults env_keep += "XAPPLRESDIR XFILESEARCHPATH XUSERFILESEARCHPATH"
+##
+## Desktop path settings
+# Defaults env_keep += "QTDIR KDEDIR"
+##
+## Allow sudo-run commands to inherit the callers" ConsoleKit session
+# Defaults env_keep += "XDG_SESSION_COOKIE"
+##
+## Uncomment to enable special input methods.  Care should be taken as
+## this may allow users to subvert the command being run via sudo.
+# Defaults env_keep += "XMODIFIERS GTK_IM_MODULE QT_IM_MODULE QT_IM_SWITCHER"
+##
+## Uncomment to use a hard-coded PATH instead of the user"s to find commands
+# Defaults secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+##
+## Uncomment to send mail if the user does not enter the correct password.
+# Defaults mail_badpass
+##
+## Uncomment to enable logging of a command"s output, except for
+## sudoreplay and reboot.  Use sudoreplay to play back logged sessions.
+# Defaults log_output
+# Defaults!/usr/bin/sudoreplay !log_output
+# Defaults!/usr/local/bin/sudoreplay !log_output
+# Defaults!REBOOT !log_output
+
+##
+## Runas alias specification
+##
+
+##
+## User privilege specification
+##
+root ALL=(ALL) ALL
+
+## Uncomment to allow members of group wheel to execute any command
+%wheel ALL=(ALL) ALL
+
+## Same thing without a password
+#%wheel ALL=(ALL) NOPASSWD: ALL
+
+## Uncomment to allow members of group sudo to execute any command
+# %sudo	ALL=(ALL) ALL
+
+## Uncomment to allow any user to run sudo if they know the password
+## of the user they are running the command as (root by default).
+# Defaults targetpw  # Ask for the password of the target user
+# ALL ALL=(ALL) ALL  # WARNING: only use this together with "Defaults targetpw"
+
+## Read drop-in files from /etc/sudoers.d
+## (the "#" here does not indicate a comment)
+#includedir /etc/sudoers.d
+' > /etc/sudoers
+echo '
+# Read and parsed by systemd-localed. It'\''s probably wise not to edit this file
+# manually too freely.
+Section "InputClass"
+        Identifier "system-keyboard"
+        MatchIsKeyboard "on"
+        Option "XkbLayout" "us,ge"
+EndSection
+
+' > /etc/X11/xorg.conf.d/00-keyboard.conf
+echo '
+LC_NUMERIC=ka_GE.UTF-8
+LC_TIME=ka_GE.UTF-8
+LC_MONETARY=ka_GE.UTF-8
+LC_PAPER=ka_GE.UTF-8
+LC_MEASUREMENT=ka_GE.UTF-8
+LANG=en_US
+' > /etc/locale.conf
+systemctl enable gdm NetworkManager
