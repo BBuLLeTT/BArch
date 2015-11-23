@@ -1,9 +1,0 @@
-[Unit]
-Description=sdbarker.com Chiliproject
-
-[Service]
-User=root
-ExecStart=/etc/profile.d/custom.sh
-
-[Install]
-WantedBy=multi-user.target
