@@ -121,8 +121,9 @@ Server = http://mirror.yandex.ru/mirrors/blackarch/$repo/os/$arch
 ' > /etc/pacman.conf
 pacman -Sy
 locale-gen
-echo LANG=en_US.UTF-8 > /etc/locale.conf
+localectl set-x11-keymap us,ge
 export LANG=en_US.UTF-8
+localectl set-locale LC_NUMERIC=ka_GE.UTF-8 LC_TIME=ka_GE.UTF-8 LC_MONETARY=ka_GE.UTF-8 LC_PAPER=ka_GE.UTF-8 LC_MEASUREMENT=ka_GE.UTF-8
 ln -s /usr/share/zoneinfo/Asia/Tbilisi > /etc/localtime
 hwclock --systohc --utc
 read -p "enter your hostname " host
@@ -249,4 +250,4 @@ ExecStart=/barch.sh' $user '
 [Install]
 WantedBy=multi-user.target
 ' > /etc/systemd/system/barch.service
-systemctl enable gdm NetworkManager
+systemctl enable barch gdm NetworkManager
