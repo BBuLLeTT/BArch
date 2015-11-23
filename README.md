@@ -1,2 +1,1 @@
-# BBuLLeTT
-# BBuLLeTT git push -u origin master
+# Arch installation
