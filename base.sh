@@ -6,7 +6,7 @@ if [ $# -eq 0 ]
 fi
 curl -O https://raw.githubusercontent.com/BBuLLeTT/BArch/master/barch.sh
 curl -O https://raw.githubusercontent.com/BBuLLeTT/BArch/master/chroot.sh
-pacstrap -i $1 base base-devel --noconfirm
+pacstrap -i $1 base base-devel --noconfirm --needed
 genfstab -U $1 > $1/etc/fstab
 cp ./chroot.sh $1/
 cp ./barch.sh $1/
