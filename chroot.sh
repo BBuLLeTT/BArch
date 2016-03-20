@@ -1,6 +1,6 @@
 #!/bin/bash
 intel(){
-	pacman -S xorg --noconfirm --needed
+	pacman -S xorg lib32-mesa-libgl --noconfirm --needed
 }
 nvidia(){
 	pacman -S xorg nvidia lib32-nvidia-libgl --noconfirm --needed
@@ -126,6 +126,9 @@ Server = http://repo.archlinux.fr/$arch
 [blackarch]
 SigLevel = Never
 Server = http://mirror.yandex.ru/mirrors/blackarch/$repo/os/$arch
+[pantheon]
+SigLevel = Optional
+Server = http://pkgbuild.com/~alucryd/$repo/$arch
 ' > /etc/pacman.conf
 pacman -Sy
 locale-gen
@@ -162,8 +165,8 @@ else
 fi
 passwd $user
 $gpu;
-echo 'pacman -S ntfs-3g os-prober grub gnome gdm gnome-extra yaourt sudo bash-completion --noconfirm --needed'
-pacman -S ntfs-3g os-prober grub gnome gdm gnome-extra yaourt sudo bash-completion linux-headers --noconfirm --needed
+echo 'pacman -S ntfs-3g os-prober grub gnome gnome-tweak-tool gdm gnome-extra yaourt sudo bash-completion --noconfirm --needed'
+pacman -S ntfs-3g os-prober ttf-opensans ttf-dejavu ttf-droid ttf-freefont ttf-liberation grub gnome gdm gnome-tweak-tool gnome-extra yaourt sudo bash-completion linux-headers --noconfirm --needed
 echo '
 ## sudoers file.
 ##
