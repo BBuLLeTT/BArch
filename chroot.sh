@@ -165,7 +165,7 @@ else
 fi
 passwd $user
 $gpu;
-echo 'pacman -S ntfs-3g os-prober grub gnome gnome-tweak-tool gdm gnome-extra yaourt sudo bash-completion --noconfirm --needed'
+echo 'pacman -S ntfs-3g os-prober grub gnome gnome-tweak-tool gdm gnome-extra yaourt sudo bash-completion efibootmgr --noconfirm --needed'
 pacman -S ntfs-3g os-prober ttf-opensans ttf-dejavu ttf-droid ttf-freefont ttf-liberation grub gnome gdm gnome-tweak-tool gnome-extra yaourt sudo bash-completion linux-headers --noconfirm --needed
 echo '
 ## sudoers file.
@@ -265,7 +265,7 @@ root ALL=(ALL) ALL
 ## Read drop-in files from /etc/sudoers.d
 ## (the "#" here does not indicate a comment)
 #includedir /etc/sudoers.d' > /etc/sudoers
-grub-install /dev/sda
+[ -d /sys/firmware/efi ] && grub-install /dev/sda --efi-directory=/boot/ || grub-install /dev/sda
 grub-mkconfig -o /boot/grub/grub.cfg
 su $user -c "yaourt -S google-chrome numix-circle-icon-theme-git sublime-text-dev broadcom-wl-dkms --noconfirm"
 echo '
