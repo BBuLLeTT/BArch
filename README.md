@@ -1,5 +1,5 @@
 # Arch installation
-Intallation: bash <(curl -s https://raw.githubusercontent.com/BBuLLeTT/BArch/master/base.sh) /mnt
+Intallation: bash <(curl -s http://goo.gl/bj5f6B) /mnt
 # What's included
 Pacman: base base-devel xorg nvidia/nvidia-340xx/nvidia-304xx 
 lib32-nvidia-libgl/lib32-nvidia-340xx-libgl/lib32-nvidia-304xx-libgl (if 
