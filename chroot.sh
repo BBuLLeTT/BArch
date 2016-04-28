@@ -166,7 +166,7 @@ fi
 passwd $user
 $gpu;
 echo 'pacman -S ntfs-3g os-prober grub gnome gnome-tweak-tool gdm gnome-extra yaourt sudo bash-completion efibootmgr --noconfirm --needed'
-pacman -S ntfs-3g os-prober ttf-opensans ttf-dejavu ttf-droid ttf-freefont ttf-liberation grub gnome gdm gnome-tweak-tool gnome-extra yaourt sudo bash-completion linux-headers --noconfirm --needed
+pacman -S ntfs-3g os-prober ttf-opensans ttf-dejavu ttf-droid ttf-freefont ttf-liberation grub gnome gdm gnome-tweak-tool gnome-extra yaourt sudo bash-completion efibootmgr linux-headers --noconfirm --needed
 echo '
 ## sudoers file.
 ##
