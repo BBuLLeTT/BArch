@@ -156,14 +156,16 @@ hwclock --systohc --utc
 read -p "enter your hostname " host
 echo $host > /etc/hostname
 read -p "gpu type intel/nvidia/nvidia-340xx/nvidia-304xx/optimus? " gpu
-	read -p "user name " user
+read -p "user name " user
+echo "password"
+read -s pass
 if [ "$gpu" == "optimus" ]; then
 	pacman -Sy bumblebee  --noconfirm --needed
 	useradd -m -g users -G audio,games,lp,optical,power,scanner,storage,video,wheel,bumblebee -s /bin/bash $user
 else
 	useradd -m -g users -G audio,games,lp,optical,power,scanner,storage,video,wheel -s /bin/bash $user
 fi
-passwd $user
+echo "$pass" | passwd $user --stdin
 $gpu;
 echo 'pacman -S ntfs-3g os-prober grub gnome gnome-tweak-tool gdm gnome-extra yaourt sudo bash-completion efibootmgr --noconfirm --needed'
 pacman -S ntfs-3g os-prober ttf-opensans ttf-dejavu ttf-droid ttf-freefont ttf-liberation grub gnome gdm gnome-tweak-tool gnome-extra yaourt sudo bash-completion efibootmgr linux-headers --noconfirm --needed
