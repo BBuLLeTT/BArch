@@ -134,16 +134,6 @@ pacman -Sy
 locale-gen
 export LANG=en_US.UTF-8
 echo '
-# Read and parsed by systemd-localed. It'\''s probably wise not to edit this file
-# manually too freely.
-Section "InputClass"
-        Identifier "system-keyboard"
-        MatchIsKeyboard "on"
-        Option "XkbLayout" "us,ge"
-EndSection
-
-' > /etc/X11/xorg.conf.d/00-keyboard.conf
-echo '
 LANG=en_US.UTF-8
 LC_NUMERIC=ka_GE.UTF-8
 LC_TIME=ka_GE.UTF-8
@@ -171,6 +161,17 @@ passwd
 $gpu;
 echo 'pacman -S ntfs-3g gnome gnome-tweak-tool gdm gnome-extra yaourt sudo bash-completion efibootmgr --noconfirm --needed'
 pacman -S ntfs-3g os-prober ttf-dejavu ttf-droid ttf-freefont ttf-liberation grub gnome gdm gnome-tweak-tool gnome-extra yaourt sudo bash-completion efibootmgr linux-headers --noconfirm --needed
+
+echo '
+# Read and parsed by systemd-localed. It'\''s probably wise not to edit this file
+# manually too freely.
+Section "InputClass"
+        Identifier "system-keyboard"
+        MatchIsKeyboard "on"
+        Option "XkbLayout" "us,ge"
+EndSection
+
+' > /etc/X11/xorg.conf.d/00-keyboard.conf
 echo '
 ## sudoers file.
 ##
