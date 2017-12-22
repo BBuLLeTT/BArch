@@ -53,9 +53,9 @@ Architecture = auto
 
 # Misc options
 #UseSyslog
-#Color
-#TotalDownload
-CheckSpace
+Color
+TotalDownload
+#CheckSpace
 #VerbosePkgLists
 
 # By default, pacman accepts packages signed by keys that its local keyring
@@ -151,24 +151,26 @@ LC_MONETARY=ka_GE.UTF-8
 LC_PAPER=ka_GE.UTF-8
 LC_MEASUREMENT=ka_GE.UTF-8
 ' > /etc/locale.conf
-ln -s /usr/share/zoneinfo/Asia/Tbilisi > /etc/localtime
+rm /etc/localtime
+ln -s /usr/share/zoneinfo/Asia/Tbilisi /etc/localtime
 hwclock --systohc --utc
 read -p "enter your hostname " host
 echo $host > /etc/hostname
 read -p "gpu type intel/nvidia/nvidia-340xx/nvidia-304xx/optimus? " gpu
 read -p "user name " user
-echo "password"
-read -s pass
 if [ "$gpu" == "optimus" ]; then
 	pacman -Sy bumblebee  --noconfirm --needed
 	useradd -m -g users -G audio,games,lp,optical,power,scanner,storage,video,wheel,bumblebee -s /bin/bash $user
 else
 	useradd -m -g users -G audio,games,lp,optical,power,scanner,storage,video,wheel -s /bin/bash $user
 fi
-echo "$pass" | passwd $user --stdin
+echo "password"
+passwd $user
+echo "root password"
+passwd
 $gpu;
-echo 'pacman -S ntfs-3g os-prober grub gnome gnome-tweak-tool gdm gnome-extra yaourt sudo bash-completion efibootmgr --noconfirm --needed'
-pacman -S ntfs-3g os-prober ttf-opensans ttf-dejavu ttf-droid ttf-freefont ttf-liberation grub gnome gdm gnome-tweak-tool gnome-extra yaourt sudo bash-completion efibootmgr linux-headers --noconfirm --needed
+echo 'pacman -S ntfs-3g gnome gnome-tweak-tool gdm gnome-extra yaourt sudo bash-completion efibootmgr --noconfirm --needed'
+pacman -S ntfs-3g os-prober ttf-dejavu ttf-droid ttf-freefont ttf-liberation grub gnome gdm gnome-tweak-tool gnome-extra yaourt sudo bash-completion efibootmgr linux-headers --noconfirm --needed
 echo '
 ## sudoers file.
 ##
@@ -251,7 +253,7 @@ echo '
 root ALL=(ALL) ALL
 
 ## Uncomment to allow members of group wheel to execute any command
-%wheel ALL=(ALL) ALL
+# %wheel ALL=(ALL) ALL
 
 ## Same thing without a password
 #%wheel ALL=(ALL) NOPASSWD: ALL
@@ -267,8 +269,8 @@ root ALL=(ALL) ALL
 ## Read drop-in files from /etc/sudoers.d
 ## (the "#" here does not indicate a comment)
 #includedir /etc/sudoers.d' > /etc/sudoers
-[ -d /sys/firmware/efi ] && grub-install /dev/sda --bootloader-id=ArchLinux || grub-install /dev/sda
-grub-mkconfig -o /boot/grub/grub.cfg
+#[ -d /sys/firmware/efi ] && grub-install /dev/sda --bootloader-id=ArchLinux || grub-install /dev/sda
+#grub-mkconfig -o /boot/grub/grub.cfg
 su $user -c "yaourt -S google-chrome numix-circle-icon-theme-git sublime-text-dev broadcom-wl-dkms --noconfirm"
 echo '
 ## sudoers file.
@@ -355,7 +357,7 @@ root ALL=(ALL) ALL
 %wheel ALL=(ALL) ALL
 
 ## Same thing without a password
-#%wheel ALL=(ALL) NOPASSWD: ALL
+# %wheel ALL=(ALL) NOPASSWD: ALL
 
 ## Uncomment to allow members of group sudo to execute any command
 # %sudo	ALL=(ALL) ALL
